@@ -1,0 +1,48 @@
+{
+  "name": "EchoSeed",
+  "version": "0.0.1",
+  "description": "EchoSeed",
+  "productName": "EchoSeed",
+  "author": "admin-yomeen <admin@yomeen.com>",
+  "private": true,
+  "scripts": {
+    "dev2": "NODE_OPTIONS=--openssl-legacy-provider quasar dev -m ssr --reset-cache",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && quasar build -m ssr",
+    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && quasar dev -m ssr --reset-cache",
+    "lint": "eslint --ext .js,.vue src functions/index.js",
+    "test": "echo \"No test specified\" && exit 0",
+    "app": "cp app.yaml functions/EchoSeed/dist && cd functions/EchoSeed/dist && gcloud app deploy -q"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "axios": "^0.18.1",
+    "core-js": "^3.6.5",
+    "numeral": "^2.0.6",
+    "quasar": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.13.14",
+    "@quasar/app": "^2.0.0",
+    "eslint": "^8.10.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "eslint-webpack-plugin": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ]
+}

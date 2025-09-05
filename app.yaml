@@ -1,0 +1,6 @@
+runtime: nodejs20
+service: echoseed
+handlers:
+  - url: /.*
+    script: auto
+    secure: always
