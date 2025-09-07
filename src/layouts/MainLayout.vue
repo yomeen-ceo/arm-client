@@ -12,7 +12,7 @@
         <div class="gt-xs">
           <app-toggle-fullscreen />
         </div>
-
+        <!-- 原本的 menu -->
         <q-btn
           flat
           dense
@@ -21,6 +21,73 @@
           icon="menu"
           aria-label="Menu"
         />
+        <!-- 五顆 chip 導覽 -->
+         <div class="chip-container">
+          <q-chip
+            clickable
+            color="primary"
+            text-color="white"
+            class="chip"
+            style="width: 120px"
+            :to="{ name: 'orderHome' }"
+          >
+            <div class="chip-content">
+              首頁
+            </div>
+          </q-chip>
+
+          <q-chip
+            clickable
+            color="primary"
+            text-color="white"
+            class="chip text-center"
+            style="width: 120px"
+            :to="{ name: 'orderList' }"
+          >
+            <div class="chip-content">
+              訂單列表
+            </div>
+          </q-chip>
+
+          <q-chip
+            clickable
+            color="primary"
+            text-color="white"
+            class="chip text-center"
+            style="width: 120px"
+            :to="{ name: 'productList' }"
+          >
+            <div class="chip-content">
+              商品列表
+            </div>
+          </q-chip>
+
+          <q-chip
+            clickable
+            color="primary"
+            text-color="white"
+            class="chip text-center"
+            style="width: 120px"
+            :to="{ name: 'ingredientsList' }"
+          >
+            <div class="chip-content">
+              配料列表
+            </div>
+          </q-chip>
+
+          <q-chip
+            clickable
+            color="primary"
+            text-color="white"
+            class="chip text-center"
+            style="width: 120px"
+            :to="{ name: 'tasteList' }"
+          >
+            <div class="chip-content">
+              口味列表
+            </div>
+          </q-chip>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -43,7 +110,7 @@
         <q-item
           clickable
           :to="{
-            name: 'home'
+            name: 'orderList'
           }"
         >
           <q-item-section avatar>
@@ -51,7 +118,7 @@
           </q-item-section>
           <q-item-section>
             <q-item-label>
-              清單模式
+              訂單列表
             </q-item-label>
           </q-item-section>
         </q-item>
@@ -112,6 +179,28 @@
     <app-portrait-tip class="lt-md orientation-portrait" />
   </q-layout>
 </template>
+
+<style scoped>
+.chip-container {
+  display: flex;
+  gap: 8px;        /* chip 間距 */
+  flex: 1;         /* 撐滿剩餘空間 */
+}
+
+.chip {
+  flex: 1;                       /* 所有 chip 寬度相同 */
+  display: flex !important;       /* 將 q-chip 變成 flex */
+  justify-content: center;        /* 水平置中 */
+  align-items: center;            /* 垂直置中 */
+  min-height: 20px;               /* 放大高度 */
+  font-size: 1.5rem;              /* 文字放大 */
+}
+
+.chip-content {
+  width: 100%;                    /* 撐滿 chip */
+  text-align: center;             /* 文字水平置中 */
+}
+</style>
 
 <script>
 // import AppLoging from 'components/AppLoging'

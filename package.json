@@ -8,7 +8,8 @@
   "scripts": {
     "dev2": "NODE_OPTIONS=--openssl-legacy-provider quasar dev -m ssr --reset-cache",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && quasar build -m ssr",
-    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && quasar dev -m ssr --reset-cache",
+    "dev3": "set NODE_OPTIONS=--openssl-legacy-provider && quasar dev -m ssr --reset-cache",
+    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && quasar dev -m ssr --host 0.0.0.0 --port 8081 --reset-cache",
     "lint": "eslint --ext .js,.vue src functions/index.js",
     "test": "echo \"No test specified\" && exit 0",
     "app": "cp app.yaml functions/EchoSeed/dist && cd functions/EchoSeed/dist && gcloud app deploy -q"

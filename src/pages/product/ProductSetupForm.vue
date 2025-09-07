@@ -174,8 +174,8 @@ export default {
         try {
           await this.axiosInstance.post('/v1/products/edit', {
             productName,
-            taste,
-            ingredients,
+            taste: taste.value,
+            ingredients: taste.ingredients,
             price: +price,
             productId,
             friedTime: +friedTime

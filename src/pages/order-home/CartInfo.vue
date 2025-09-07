@@ -41,10 +41,12 @@
         <q-space />
         <input
           id="paymentAmount"
+          ref="paymentInput"
           class="text-input"
           type="number"
           v-model.number="paymentAmount"
           @input="$emit('input-payment-amount', { paymentAmount })"
+          @keyup.enter="submit"
         />
       </div>
       <div
@@ -161,7 +163,30 @@ export default {
   methods: {
     isFloat ({ number }) {
       return number.toString().indexOf('.') !== -1
+    },
+    submit () {
+      // 驗證 paymentAmount
+      if (
+        this.paymentAmount === '' ||
+        this.paymentAmount === null ||
+        isNaN(this.paymentAmount) ||
+        Number(this.paymentAmount) === 0
+      ) {
+        this.$q.notify({
+          type: 'negative',
+          message: '請輸入有效的付款金額'
+        })
+        return
+      }
+      console.log('送出囉 ✅')
+      // 這裡可以接你原本的送出流程
     }
+  },
+  mounted () {
+    // 畫面一出現就 focus
+    this.$nextTick(() => {
+      this.$refs.paymentInput.focus()
+    })
   }
 }
 </script>

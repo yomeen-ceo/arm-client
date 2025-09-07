@@ -4,7 +4,6 @@ module.exports = {
   defaultAvatar: '/statics/default-avatar.png',
   // 需要登入後，才能去的頁面 ( 設定 route name )
   needAuthRouteNames: [
-    'home',
     'kitchen-setting',
     'forHere',
     'takeout',

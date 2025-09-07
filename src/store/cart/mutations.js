@@ -2,10 +2,7 @@ import _ from 'lodash'
 import { LocalStorage } from 'quasar'
 
 export function initItem (state, payload) {
-  const {
-    storeId
-  } = payload
-  const items = JSON.parse(LocalStorage.getItem(`cartItems-${storeId}`))
+  const items = JSON.parse(LocalStorage.getItem('cartItems'))
   if (items) {
     state.items = [...items]
   }
@@ -16,17 +13,11 @@ export function initItem (state, payload) {
 }
 
 export function clearItem (state, payload) {
-  const {
-    storeId
-  } = payload
   state.items = []
-  LocalStorage.set(`cartItems-${storeId}`, JSON.stringify(state.items))
+  LocalStorage.set('cartItems', JSON.stringify(state.items))
 }
 
 export function subtractionItemAmount (state, payload) {
-  const {
-    storeId
-  } = payload
   let items = [...state.items]
   items = items.map((item) => {
     const isSameItem = checkIsSameItem({
@@ -45,13 +36,10 @@ export function subtractionItemAmount (state, payload) {
     return true
   })
   state.items = [...items]
-  LocalStorage.set(`cartItems-${storeId}`, JSON.stringify(state.items))
+  LocalStorage.set('cartItems', JSON.stringify(state.items))
 }
 
 export function additionItemAmount (state, payload) {
-  const {
-    storeId
-  } = payload
   let items = [...state.items]
   items = items.map((item) => {
     const isSameItem = checkIsSameItem({
@@ -64,13 +52,10 @@ export function additionItemAmount (state, payload) {
     return item
   })
   state.items = [...items]
-  LocalStorage.set(`cartItems-${storeId}`, JSON.stringify(state.items))
+  LocalStorage.set('cartItems', JSON.stringify(state.items))
 }
 
 export function deleteCartItem (state, payload) {
-  const {
-    storeId
-  } = payload
   let items = [...state.items]
   items = items.filter((item) => {
     const isSameItem = checkIsSameItem({
@@ -83,7 +68,7 @@ export function deleteCartItem (state, payload) {
     return true
   })
   state.items = [...items]
-  LocalStorage.set(`cartItems-${storeId}`, JSON.stringify(state.items))
+  LocalStorage.set('cartItems', JSON.stringify(state.items))
 }
 
 export function setItem (state, payload) {
