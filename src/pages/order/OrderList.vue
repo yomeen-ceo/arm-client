@@ -71,7 +71,7 @@ export default {
       this.orders = []
       this.loading = true
       try {
-        const res = await this.axiosInstance.get('/v1/orders/list')
+        const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/orders/list')
         const {
           orders
         } = res.data
