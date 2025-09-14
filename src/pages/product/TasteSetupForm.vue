@@ -86,7 +86,7 @@ export default {
         this.isSubmitting = true
         if ((this.tasteNameOld !== this.tasteName) || (this.priceOld !== this.price)) {
           try {
-            await this.axiosInstance.post('/v1/taste/edit', {
+            await this.axiosInstance.post('http://192.168.18.112:5000/v1/taste/edit', {
               tasteName,
               price: +price,
               tasteId
@@ -116,7 +116,7 @@ export default {
       } else {
         this.isSubmitting = true
         try {
-          const res = await this.axiosInstance.post('/v1/taste/create', {
+          const res = await this.axiosInstance.post('http://192.168.18.112:5000/v1/taste/create', {
             tasteName,
             price: +price
           })

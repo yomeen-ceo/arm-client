@@ -196,11 +196,15 @@ export default {
         paymentAmount
       }
       try {
+        // const res = await this.axiosInstance.post('http://192.168.18.112:5000/v1/orders/create', {
+        //   order
+        // })
         const res = await this.axiosInstance.post('/v1/orders/create', {
           order
         })
-        console.log('======res.data')
-        console.log(res.data)
+        const orderData = res.data
+        console.log('======orderData')
+        console.log(orderData)
         this.$store.dispatch('cart/clearItem')
         this.$emit('close')
         this.$q.notify({
@@ -320,7 +324,7 @@ export default {
     //     })
     //     body.localUid = this.$store.state.local.localUid
     //   }
-    //   const res = await this.axiosInstance.post('/v1/mypay/createOrder', body)
+    //   const res = await this.axiosInstance.post('http://192.168.18.112:5000/v1/mypay/createOrder', body)
     //   const { url, orderId, creationTime } = res.data
     //   if (!url) {
     //     this.isMobilePayRunning = false

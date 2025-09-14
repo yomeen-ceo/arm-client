@@ -192,7 +192,7 @@ export default {
         const productId = this.product._id
         this.isSubmitting = true
         try {
-          await this.axiosInstance.post('/v1/products/edit', {
+          await this.axiosInstance.post('http://192.168.18.112:5000/v1/products/edit', {
             productName,
             kind,
             taste: taste.value,
@@ -219,7 +219,7 @@ export default {
       } else { // 新增
         this.isSubmitting = true
         try {
-          const res = await this.axiosInstance.post('/v1/products/create', {
+          const res = await this.axiosInstance.post('http://192.168.18.112:5000/v1/products/create', {
             productName,
             kind,
             taste,
@@ -250,7 +250,7 @@ export default {
     async fetch () {
       // 取得 口味
       try {
-        const res = await this.axiosInstance.get('/v1/taste/list')
+        const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/taste/list')
         const { taste } = res.data
         const tasteOptions = []
         for (let i = 0, length = taste.length; i < length; i = i + 1) {
@@ -265,7 +265,7 @@ export default {
       }
       // 取得 配料
       try {
-        const res = await this.axiosInstance.get('/v1/ingredients/list')
+        const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/ingredients/list')
         console.log('=====res.data')
         console.log(res.data)
         const { ingredients } = res.data

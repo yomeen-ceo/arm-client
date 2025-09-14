@@ -118,7 +118,7 @@ export default {
   },
   methods: {
     async fetch () {
-      // const res = await this.axiosInstance.get('/v1/stores/set/saveData')
+      // const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/stores/set/saveData')
       const res = await this.axiosInstance.get('https://api-dot-i-food-project-v1.an.r.appspot.com/v1/stores/set/saveData')
       console.log('====res.data')
       console.log(res.data)

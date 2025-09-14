@@ -29,7 +29,7 @@
             text-color="white"
             class="chip"
             style="width: 120px"
-            :to="{ name: 'orderHome' }"
+            @click="chipAction('orderHome')"
           >
             <div class="chip-content">
               首頁
@@ -42,7 +42,7 @@
             text-color="white"
             class="chip text-center"
             style="width: 120px"
-            :to="{ name: 'orderList' }"
+            @click="chipAction('orderList')"
           >
             <div class="chip-content">
               訂單列表
@@ -55,7 +55,7 @@
             text-color="white"
             class="chip text-center"
             style="width: 120px"
-            :to="{ name: 'productList' }"
+            @click="chipAction('productList')"
           >
             <div class="chip-content">
               商品列表
@@ -68,7 +68,7 @@
             text-color="white"
             class="chip text-center"
             style="width: 120px"
-            :to="{ name: 'ingredientsList' }"
+            @click="chipAction('ingredientsList')"
           >
             <div class="chip-content">
               配料列表
@@ -81,7 +81,7 @@
             text-color="white"
             class="chip text-center"
             style="width: 120px"
-            :to="{ name: 'tasteList' }"
+            @click="chipAction('tasteList')"
           >
             <div class="chip-content">
               口味列表
@@ -182,6 +182,56 @@
         </q-item>
       </q-list>
     </q-drawer>
+    <q-drawer
+      side="right"
+      v-model="drawerRight"
+      show-if-above
+      bordered
+      :width="200"
+      :breakpoint="500"
+      content-class="bg-grey-3"
+    >
+      <q-scroll-area class="fit">
+        <!-- 已完成出餐序號 -->
+        <div class="q-pa-sm text-h5">
+          已完成出餐序號
+        </div>
+        <div class="q-pa-sm">
+          <!-- 這裡放已完成的序號列表 -->
+          <q-list dense>
+            <q-item v-for="num in sucessList" :key="num">
+              <q-item-section>
+                <q-chip
+                  clickable
+                  color="primary"
+                  text-color="white"
+                  class="chip text-center"
+                  style="width: 120px"
+                  @click="sucessOrder(num)"
+                >
+                  <div class="chip-content">
+                    {{ num }}
+                  </div>
+                </q-chip>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+
+        <!-- 出餐等候序號 -->
+        <div class="q-pa-sm text-h5">
+          出餐等候序號
+        </div>
+        <div class="q-pa-sm">
+          <!-- 這裡放等候的序號列表 -->
+          <q-list dense>
+            <q-item v-for="num in waitList" :key="num">
+              <q-item-section>{{ num }}</q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+      </q-scroll-area>
+    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -231,7 +281,11 @@ export default {
   },
   data () {
     return {
-      rightDrawerOpen: false
+      drawerRight: true,
+      rightDrawerOpen: false,
+      intervalId: null,
+      waitList: [],
+      sucessList: []
     }
   },
   watch: {
@@ -243,9 +297,43 @@ export default {
       })
       console.log('======res.data')
       console.log(res.data)
+    },
+    chipAction (val) {
+      this.$router.push({
+        name: val
+      })
+    },
+    async sucessOrder (val) {
+      const taskId = val
+      const res = await this.axiosInstance.post('/v1/orders/sucess', { taskId })
+      console.log('=======res.data')
+      console.log(res.data)
+    },
+    async fetch () {
+      this.intervalId = setInterval(async () => {
+        const res = await this.axiosInstance.get('/v1/orders/taskList')
+        // 取得出餐等候序號
+        const list = res.data.waitList
+        const waitList = []
+        for (let i = 0, length = list.length; i < length; i = i + 1) {
+          waitList.push(list[i])
+        }
+        this.waitList = waitList
+        // 取得未完成出餐序號
+        const orders = res.data.orders
+        const result = orders.filter(order => {
+          return order.status === false && !waitList.includes(order.taskIdArray[0])
+        })
+        const sucessList = []
+        for (let i = 0, length = result.length; i < length; i = i + 1) {
+          sucessList.push(result[i].taskIdArray[0])
+        }
+        this.sucessList = sucessList
+      }, 1000)
     }
   },
   mounted () {
+    this.fetch()
   }
 }
 </script>

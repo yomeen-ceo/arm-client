@@ -173,7 +173,7 @@ export default {
     async fetch () {
       try {
         // 取得產品列表
-        const res = await this.axiosInstance.get('/v1/products/list')
+        const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/products/list')
         const products = res.data.products
         // 製作分類列表，將相同分類的產品塞進同一個分類
         const kinds = Object.values(
