@@ -167,6 +167,19 @@
             </q-item-label>
           </q-item-section>
         </q-item>
+        <q-item
+          clickable
+          @click="testAxios"
+        >
+          <q-item-section avatar>
+            <q-icon name="list_alt" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>
+              測試手臂動作
+            </q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -224,6 +237,13 @@ export default {
   watch: {
   },
   methods: {
+    async testAxios () {
+      const res = await this.axiosInstance.post('http://192.168.1.105:3333/api/robot/start-task', {
+        sceneId: '10002'
+      })
+      console.log('======res.data')
+      console.log(res.data)
+    }
   },
   mounted () {
   }
