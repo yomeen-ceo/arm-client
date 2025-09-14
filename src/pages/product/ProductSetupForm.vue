@@ -100,6 +100,19 @@
       />
     </div>
     <div>
+      <q-input
+        outlined
+        v-model="scenarioId"
+        type="number"
+        label="場景ID"
+        hint="必填"
+        :rules="[
+          val => !!val || '場景ID必填',
+          val => val > 0 || '場景ID格式錯誤'
+        ]"
+      />
+    </div>
+    <div>
       <q-btn
         class="full-width"
         label="儲存送出"
@@ -134,7 +147,8 @@ export default {
       tasteOptions: [],
       ingredients: [],
       ingredientsOptions: [],
-      friedTime: ''
+      friedTime: '',
+      scenarioId: ''
     }
   },
   watch: {
@@ -142,30 +156,36 @@ export default {
       if (!newValue) {
         return
       }
-      const { productName, price, taste, ingredients, friedTime } = newValue
+      const { productName, kind, price, taste, ingredients, friedTime, scenarioId } = newValue
       this.productName = productName
       this.price = price
+      this.kind = kind
       this.taste = taste
       this.ingredients = ingredients
       this.friedTime = friedTime
+      this.scenarioId = scenarioId
     }
   },
   methods: {
     onReset () {
       this.isSubmitting = false
       this.productName = ''
+      this.kind = ''
       this.price = null
       this.taste = []
       this.ingredients = []
       this.friedTime = null
+      this.scenarioId = null
     },
     async onSubmit () {
       const {
         productName,
+        kind,
         price,
         taste,
         ingredients,
-        friedTime
+        friedTime,
+        scenarioId
       } = this
       // 修改
       if (this.product) {
@@ -174,11 +194,13 @@ export default {
         try {
           await this.axiosInstance.post('/v1/products/edit', {
             productName,
+            kind,
             taste: taste.value,
             ingredients: taste.ingredients,
             price: +price,
             productId,
-            friedTime: +friedTime
+            friedTime: +friedTime,
+            scenarioId: +scenarioId
           })
         } catch (error) {
           this.isSubmitting = false
@@ -199,10 +221,12 @@ export default {
         try {
           const res = await this.axiosInstance.post('/v1/products/create', {
             productName,
+            kind,
             taste,
             ingredients,
             price: +price,
-            friedTime: +friedTime
+            friedTime: +friedTime,
+            scenarioId: +scenarioId
           })
           console.log('=========res.data')
           console.log(res.data)
@@ -264,10 +288,12 @@ export default {
     console.log(this.product)
     if (this.product) {
       this.productName = this.product.productName
+      this.kind = this.product.kind
       this.price = this.product.price
       this.productNameOld = this.product.productName
       this.priceOld = this.product.price
       this.friedTime = this.product.friedTime
+      this.scenarioId = this.product.scenarioId
     }
   }
 }
