@@ -150,9 +150,10 @@ export default {
   },
   methods: {
     async fetch () {
-      const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/products/list')
+      // const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/products/list')
+      const res = await this.axiosInstance.get('/v1/products/list')
       const oldProducts = res.data.products
-      console.log('=======oldProducts')
+      console.log('======oldProducts')
       console.log(oldProducts)
       const products = []
       for (let i = 0, length = oldProducts.length; i < length; i = i + 1) {

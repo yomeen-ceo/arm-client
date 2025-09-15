@@ -36,6 +36,8 @@ export default {
   methods: {
     async fetch () {
       const { productId } = this.$route.params
+      console.log('=======productId')
+      console.log(productId)
       const res = await this.axiosInstance.get(`/v1/products/detail/${productId}`)
       const { product } = res.data
       console.log('========123====product')

@@ -384,7 +384,8 @@ export default {
         email,
         date
       } = this
-      await this.axiosInstance.post('http://192.168.18.112:5000/v1/stores/set/saveData', {
+      // await this.axiosInstance.post('http://192.168.18.112:5000/v1/stores/set/saveData', {
+      await this.axiosInstance.post('/v1/stores/set/saveData', {
         score,
         ans1,
         ans5,

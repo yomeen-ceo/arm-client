@@ -118,7 +118,8 @@ export default {
   },
   methods: {
     async fetch () {
-      const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/ingredients/list')
+      // const res = await this.axiosInstance.get('http://192.168.18.112:5000/v1/ingredients/list')
+      const res = await this.axiosInstance.get('/v1/ingredients/list')
       const ingredients = res.data.ingredients
       console.log('=========ingredients')
       console.log(ingredients)

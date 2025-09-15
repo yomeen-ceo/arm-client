@@ -86,7 +86,8 @@ export default {
         this.isSubmitting = true
         if ((this.ingredientsNameOld !== this.ingredientsName) || (this.priceOld !== this.price)) {
           try {
-            await this.axiosInstance.post('http://192.168.18.112:5000/v1/ingredients/edit', {
+            // await this.axiosInstance.post('http://192.168.18.112:5000/v1/ingredients/edit', {
+            await this.axiosInstance.post('/v1/ingredients/edit', {
               ingredientsName,
               price: +price,
               ingredientsId
