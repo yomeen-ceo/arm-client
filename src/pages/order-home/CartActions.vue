@@ -195,6 +195,10 @@ export default {
         totalResult,
         paymentAmount
       }
+      // 訂單送出後，記錄到localStorage中的orders
+      const orders = this.$q.localStorage.getItem('orders') || []
+      orders.push(order)
+      this.$q.localStorage.set('orders', orders)
       try {
         // const res = await this.axiosInstance.post('http://192.168.18.112:5000/v1/orders/create', {
         //   order

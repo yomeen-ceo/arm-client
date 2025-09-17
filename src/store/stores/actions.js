@@ -16,3 +16,9 @@ export function setAudioMuted (context, { isMuted }) {
     isMuted
   })
 }
+
+export function setOrders (context, { orders }) {
+  context.commit('setOrders', {
+    orders
+  })
+}

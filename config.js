@@ -5,7 +5,6 @@ module.exports = {
   // 需要登入後，才能去的頁面 ( 設定 route name )
   needAuthRouteNames: [
     'kitchen-setting',
-    'forHere',
     'takeout',
     'delivery',
     'about',

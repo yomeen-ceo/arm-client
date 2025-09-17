@@ -7,8 +7,6 @@ import cart from './cart'
 import aboutPage from './aboutPage'
 import countries from './countries'
 import stores from './stores'
-import forHerePage from './forHerePage'
-import kitchenSetting from './kitchenSetting'
 
 Vue.use(Vuex)
 
@@ -29,9 +27,7 @@ export default function (/* { ssrContext } */) {
       cart,
       aboutPage,
       countries,
-      stores,
-      forHerePage,
-      kitchenSetting
+      stores
     },
 
     // enable strict mode (adds overhead!)

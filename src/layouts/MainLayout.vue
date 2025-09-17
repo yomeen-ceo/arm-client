@@ -2,13 +2,6 @@
   <q-layout view="lhh lpr lff">
     <q-header elevated class="bg-white text-grey-8">
       <q-toolbar>
-        <!-- <q-toolbar-title class="overflow-initial">
-          <app-option-buttons />
-        </q-toolbar-title> -->
-        <span v-if="$store.state.stores.store" class="text-subtitle1 q-mr-md">
-          {{ $store.state.stores.store.name }}
-        </span>
-
         <div class="gt-xs">
           <app-toggle-fullscreen />
         </div>
@@ -266,16 +259,12 @@
 </style>
 
 <script>
-// import AppLoging from 'components/AppLoging'
-// import AppOptionButtons from 'components/AppOptionButtons'
 import AppToggleFullscreen from 'components/AppToggleFullscreen'
 import AppPortraitTip from 'components/AppPortraitTip'
 
 export default {
   name: 'MainLayout',
   components: {
-    // AppLoging,
-    // AppOptionButtons,
     AppToggleFullscreen,
     AppPortraitTip
   },
@@ -309,7 +298,7 @@ export default {
       console.log('=======res.data')
       console.log(res.data)
     },
-    async fetch () {
+    async fetch () { // 取得所有未完成的訂單序號
       this.intervalId = setInterval(async () => {
         const res = await this.axiosInstance.get('/v1/orders/taskList')
         // 取得出餐等候序號
@@ -318,15 +307,17 @@ export default {
         for (let i = 0, length = list.length; i < length; i = i + 1) {
           waitList.push(list[i])
         }
+        console.log('=========waitList')
+        console.log(waitList)
         this.waitList = waitList
         // 取得未完成出餐序號
         const orders = res.data.orders
         const result = orders.filter(order => {
-          return order.status === false && !waitList.includes(order.taskIdArray[0])
+          return order.status === false && !waitList.includes(order.taskIdArray[order.taskIdArray.length - 1])
         })
         const sucessList = []
         for (let i = 0, length = result.length; i < length; i = i + 1) {
-          sucessList.push(result[i].taskIdArray[0])
+          sucessList.push(result[i].taskIdArray[result[i].taskIdArray.length - 1])
         }
         this.sucessList = sucessList
       }, 1000)

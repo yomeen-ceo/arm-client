@@ -187,8 +187,6 @@ export default {
           }, {})
         )
         this.kindMenus = kinds
-        console.log('=========kinds')
-        console.log(kinds)
         this.activeKind = this.kindMenus[0]
       } catch (error) {
         console.log(error)
