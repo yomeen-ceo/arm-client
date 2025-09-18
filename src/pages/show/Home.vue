@@ -106,7 +106,7 @@ export default {
   data () {
     return {
       icons: ['home', 'info', 'new_releases', 'shopping_bag', 'favorite', 'settings'],
-      label: ['待機', '哈囉', '握手準備', '開始握手', '開始炸物', '預備']
+      label: ['待機', '哈囉', '握手', '開始炸物', '取出炸物', '鬆爪回歸']
     }
   },
   methods: {
@@ -114,36 +114,44 @@ export default {
       try {
         if (n === 1) {
           // 待機
-          await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
+          await this.axiosInstance.post('http://192.168.18.111:3333/api/robot/start-task', {
             sceneId: '10023'
           })
         } else if (n === 2) {
           // 哈囉
-          await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
+          await this.axiosInstance.post('http://192.168.18.111:3333/api/robot/start-task', {
             sceneId: '10022'
           })
         } else if (n === 3) {
-          // 握手準備
-          await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
+          // 握手
+          await this.axiosInstance.post('http://192.168.18.111:3333/api/robot/start-task', {
             sceneId: '10020'
           })
         } else if (n === 4) {
-          // 開始握手
-        } else if (n === 5) {
           // 開始炸物
-          // 第一次呼叫
-          await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
+          await this.axiosInstance.post('http://192.168.18.111:3333/api/robot/start-task', {
             sceneId: '10021'
           })
-          // 等待 4 分鐘 (240000 毫秒)
-          await this.sleep(4 * 60 * 1000)
-          // 第二次呼叫
-          await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
-            sceneId: '10022'
+        } else if (n === 5) {
+          // 取出炸物
+          await this.axiosInstance.post('http://192.168.18.111:3333/api/robot/start-task', {
+            sceneId: '10024'
           })
+          // 第一次呼叫
+          // await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
+          //   sceneId: '10021'
+          // })
+          // 等待 4 分鐘 (240000 毫秒)
+          // await this.sleep(4 * 60 * 1000)
+          // 第二次呼叫
+          // await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
+          //   sceneId: '10022'
+          // })
         } else if (n === 6) {
-          // 預備
-          this.test()
+          // 鬆爪回歸
+          await this.axiosInstance.post('http://192.168.18.111:3333/api/robot/start-task', {
+            sceneId: '10026'
+          })
         }
       } catch (err) {
         console.log(err)
