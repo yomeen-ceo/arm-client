@@ -281,7 +281,7 @@ export default {
   },
   methods: {
     async testAxios () {
-      const res = await this.axiosInstance.post('http://localhost:3333/api/robot/start-task', {
+      const res = await this.axiosInstance.post('http://192.168.1.76:3333/api/robot/start-task', {
         sceneId: '10002'
       })
       console.log('======res.data')
